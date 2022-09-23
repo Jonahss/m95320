@@ -17,6 +17,7 @@ mod log;
 mod error;
 pub mod prelude;
 pub mod series25;
+pub mod M95320;
 mod utils;
 
 pub use crate::error::Error;
