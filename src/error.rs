@@ -25,6 +25,11 @@ pub enum Error<SPI: Transfer<u8>, GPIO: OutputPin> {
     /// still a write in progress).
     UnexpectedStatus,
 
+    /// Address Out of Bounds
+    /// 
+    /// Tried to address memory beyond the limit of the peripheral
+    AddressOutOfBounds(u128),
+
     #[doc(hidden)]
     __NonExhaustive(private::Private),
 }
@@ -39,6 +44,7 @@ where
             Error::Spi(spi) => write!(f, "Error::Spi({:?})", spi),
             Error::Gpio(gpio) => write!(f, "Error::Gpio({:?})", gpio),
             Error::UnexpectedStatus => f.write_str("Error::UnexpectedStatus"),
+            Error::AddressOutOfBounds(addr) => write!(f, "Error:AddressOutOfBounds({:?})", addr),
             Error::__NonExhaustive(_) => unreachable!(),
         }
     }
@@ -54,6 +60,7 @@ where
             Error::Spi(spi) => write!(f, "SPI error: {}", spi),
             Error::Gpio(gpio) => write!(f, "GPIO error: {}", gpio),
             Error::UnexpectedStatus => f.write_str("unexpected value in status register"),
+            Error::AddressOutOfBounds(addr) => write!(f, "Error:AddressOutOfBounds({:?})", addr),
             Error::__NonExhaustive(_) => unreachable!(),
         }
     }
