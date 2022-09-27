@@ -4,8 +4,8 @@
 use rppal::gpio::Gpio;
 use rppal::spi::{Bus, Mode, SlaveSelect, Spi};
 
-use spi_memory::prelude::*;
-use spi_memory::M95320::Flash;
+use m95320::prelude::*;
+use m95320::m95320::Flash;
 
 const GPIO_MEMORY_CHIP_SELECT: u8 = 27;
 
