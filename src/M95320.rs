@@ -153,7 +153,7 @@ impl<SPI: Transfer<u8>, CS: OutputPin> BlockDevice<u16, SPI, CS> for Flash<SPI, 
 
         self.write_bytes(addr, &mut buf[..first_chunk_length.into()])?;
 
-        let mut current_addr = addr - first_chunk_length + PAGE_SIZE;
+        let mut current_addr = addr + first_chunk_length;
         for _ in 1..amount {
             let mut buf = [0; 32];
             self.write_bytes(current_addr, &mut buf)?;
