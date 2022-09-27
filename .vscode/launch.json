@@ -11,11 +11,11 @@
       "cargo": {
         "args": [
           "build",
-          "--bin=spi-memory",
-          "--package=spi-memory"
+          "--bin=m95320",
+          "--package=m95320"
         ],
         "filter": {
-          "name": "spi-memory",
+          "name": "m95320",
           "kind": "bin"
         },
         "env": {
@@ -33,11 +33,11 @@
         "args": [
           "test",
           "--no-run",
-          "--bin=spi-memory",
-          "--package=spi-memory"
+          "--bin=m95320",
+          "--package=m95320"
         ],
         "filter": {
-          "name": "spi-memory",
+          "name": "m95320",
           "kind": "bin"
         }
       },

@@ -1,14 +1,11 @@
 /// These tests use a Raspberry Pi connected to the memory chip
 /// and the `rppal` raspeberry pi embedded-hal library
 
-use rppal::gpio::{ Gpio, Trigger };
+use rppal::gpio::Gpio;
 use rppal::spi::{Bus, Mode, SlaveSelect, Spi};
 
 use spi_memory::prelude::*;
 use spi_memory::M95320::Flash;
-
-use std::time::Duration;
-use std::thread;
 
 const GPIO_MEMORY_CHIP_SELECT: u8 = 27;
 
@@ -19,16 +16,16 @@ mod tests {
     #[test]
     fn test() {
         let gpio = Gpio::new().unwrap();
-        let mut cs = gpio.get(GPIO_MEMORY_CHIP_SELECT).unwrap().into_output();
+        let cs = gpio.get(GPIO_MEMORY_CHIP_SELECT).unwrap().into_output();
         let spi = Spi::new(Bus::Spi0, SlaveSelect::Ss0, 10_000_000, Mode::Mode0).unwrap();
 
         let mut flash = Flash::init(spi, cs).unwrap();
 
-        let status = flash.read_status().expect("get status");
+        let _status = flash.read_status().expect("get status");
 
         let mut page_buffer: [u8; 32] = [0x0; 32];
 
-        flash.erase_sectors(0, 2);
+        flash.erase_sectors(0, 2).expect("erase");
 
 
         flash.read(0, &mut page_buffer).expect("read");

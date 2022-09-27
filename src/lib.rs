@@ -1,14 +1,10 @@
-//! An [`embedded-hal`]-based SPI-Flash chip driver.
-//!
-//! This crate aims to be compatible with common families of SPI flash chips.
-//! Currently, reading, writing, erasing 25-series chips is supported, and
-//! support for other chip families (eg. 24-series chips) is planned.
-//!
-//! Contributions are welcome!
-//!
-//! [`embedded-hal`]: https://docs.rs/embedded-hal/
+//! [`embedded-hal`] Rust driver for STMicroelectronics M95320 32-Kbit serial SPI bus EEPROM
+//! 
+//! *some features not yet implemented, basic read and write is working*
+//! 
+// ! This create is mostly ripped-off from the `spi-memory` crate: https://github.com/jonas-schievink/spi-memory
 
-#![doc(html_root_url = "https://docs.rs/spi-memory/0.2.0")]
+#![doc(html_root_url = "https://docs.rs/m95320/1.0.0")]
 #![warn(missing_debug_implementations, rust_2018_idioms)]
 #![cfg_attr(not(test), no_std)]
 
@@ -16,8 +12,7 @@
 mod log;
 mod error;
 pub mod prelude;
-pub mod series25;
-pub mod M95320;
+pub mod m95320;
 mod utils;
 
 pub use crate::error::Error;

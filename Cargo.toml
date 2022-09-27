@@ -1,12 +1,12 @@
 [package]
-name = "spi-memory"
-version = "0.2.0"
-authors = ["Jonas Schievink <jonasschievink@gmail.com>", "Henrik Böving <hargonix@gmail.com>"]
+name = "m95320"
+version = "1.0.0"
+authors = ["Jonah Stiennon <jonahss@gmail.com>", "Jonas Schievink <jonasschievink@gmail.com>", "Henrik Böving <hargonix@gmail.com>"]
 edition = "2018"
-description = "A generic driver for different SPI Flash and EEPROM chips"
-documentation = "https://docs.rs/spi-memory/"
-repository = "https://github.com/jonas-schievink/spi-memory.git"
-keywords = ["embedded-hal-driver", "serial", "flash", "eeprom", "spi"]
+description = "Driver for STMicroelectronics M95320 32-Kbit serial SPI bus EEPROM"
+documentation = "https://docs.rs/m95320/"
+repository = "https://github.com/jonass/m95320.git"
+keywords = ["embedded-hal-driver", "serial", "flash", "eeprom", "spi", "STMicroelectronics", "M95320"]
 categories = ["embedded"]
 readme = "README.md"
 license = "0BSD"
@@ -27,14 +27,14 @@ replace = "## Unreleased\n\nNo changes.\n\n## {{version}} - {{date}}"
 # Bump the version inside the example manifest in `README.md`
 [[package.metadata.release.pre-release-replacements]]
 file    = "README.md"
-search  = 'spi-memory = "[a-z0-9\\.-]+"'
-replace = 'spi-memory = "{{version}}"'
+search  = 'm95320 = "[a-z0-9\\.-]+"'
+replace = 'm95320 = "{{version}}"'
 
 # Bump the version referenced by the `html_root_url` attribute in `lib.rs`
 [[package.metadata.release.pre-release-replacements]]
 file    = "src/lib.rs"
-search  = "https://docs.rs/spi-memory/[a-z0-9\\.-]+"
-replace = "https://docs.rs/spi-memory/{{version}}"
+search  = "https://docs.rs/m95320/[a-z0-9\\.-]+"
+replace = "https://docs.rs/m95320/{{version}}"
 
 [dependencies]
 embedded-hal = "0.2.7"

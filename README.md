@@ -1,17 +1,14 @@
-# `spi-memory`
+# `m95320`
 
-[![crates.io](https://img.shields.io/crates/v/spi-memory.svg)](https://crates.io/crates/spi-memory)
-[![docs.rs](https://docs.rs/spi-memory/badge.svg)](https://docs.rs/spi-memory/)
-[![Build Status](https://travis-ci.org/jonas-schievink/spi-memory.svg?branch=master)](https://travis-ci.org/jonas-schievink/spi-memory)
+[![crates.io](https://img.shields.io/crates/v/m95320.svg)](https://crates.io/crates/spi-memory)
+[![docs.rs](https://docs.rs/m95320/badge.svg)](https://docs.rs/m95320/)
 
-This crate provides a generic [`embedded-hal`]-based driver for different
-families of SPI Flash and EEPROM chips.
+[`embedded-hal`] Rust driver for STMicroelectronics M95320 32-Kbit serial SPI bus EEPROM
 
-Right now, only 25-series Flash chips are supported. Feel free to send PRs to
-support other families though!
+*some features not yet implemented, basic read and write is working*
 
-Please refer to the [changelog](CHANGELOG.md) to see what changed in the last
-releases.
+This create is mostly ripped-off from the `spi-memory` crate: https://github.com/jonas-schievink/spi-memory
+
 
 [`embedded-hal`]: https://github.com/rust-embedded/embedded-hal
 
@@ -21,8 +18,15 @@ Add an entry to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-spi-memory = "0.2.0"
+m95320 = "1.0.0"
 ```
 
-Check the [API Documentation](https://docs.rs/spi-memory/) for how to use the
+## Example
+Using `rppal` on a Raspberry Pi:
+```
+
+
+```
+
+Check the [API Documentation](https://docs.rs/m95320/) for how to use the
 crate's functionality.
