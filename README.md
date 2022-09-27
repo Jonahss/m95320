@@ -1,6 +1,6 @@
 # `m95320`
 
-[![crates.io](https://img.shields.io/crates/v/m95320.svg)](https://crates.io/crates/spi-memory)
+[![crates.io](https://img.shields.io/crates/v/m95320.svg)](https://crates.io/crates/m95320)
 [![docs.rs](https://docs.rs/m95320/badge.svg)](https://docs.rs/m95320/)
 
 [`embedded-hal`] Rust driver for STMicroelectronics M95320 32-Kbit serial SPI bus EEPROM
