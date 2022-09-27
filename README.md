@@ -18,7 +18,7 @@ Add an entry to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-m95320 = "1.0.1"
+m95320 = "1.0.2"
 ```
 
 ## Example
