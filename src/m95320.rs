@@ -166,20 +166,29 @@ impl<SPI: Transfer<u8>, CS: OutputPin> BlockDevice<u16, SPI, CS> for Flash<SPI, 
     fn write_bytes(&mut self, addr: u16, data: &mut [u8]) -> Result<(), Error<SPI, CS>> {
         let mut current_addr: u16 = addr;
 
-        let first_chunk_length = PAGE_SIZE - (current_addr % PAGE_SIZE);
-        let (first_chunk, rest_of_data) = data.split_at_mut(first_chunk_length.into());
+        let mut first_chunk: &mut [u8] = &mut [];
+        let mut rest_of_data: &mut [u8] = &mut [];
+
+        if (data.len() + addr as usize) < PAGE_SIZE.into() {
+            first_chunk = data;
+        } else {
+            let first_chunk_length = PAGE_SIZE - (current_addr % PAGE_SIZE);
+            (first_chunk, rest_of_data) = data.split_at_mut(first_chunk_length.into());
+        }
 
         self.write_bytes_to_page(addr, first_chunk)?;
 
-        // align address to page boundary
-        let remainder = current_addr % PAGE_SIZE;
-        current_addr = current_addr - remainder + PAGE_SIZE;
+        if rest_of_data.len() > 0 {
+            // align address to page boundary
+            let remainder = current_addr % PAGE_SIZE;
+            current_addr = current_addr - remainder + PAGE_SIZE;
 
-        for chunk_data in rest_of_data.rchunks_mut(PAGE_SIZE.into()).rev() {
-            self.write_bytes_to_page(current_addr, chunk_data)?;
-    
-            // advance to next page
-            current_addr += PAGE_SIZE;
+            for chunk_data in rest_of_data.rchunks_mut(PAGE_SIZE.into()).rev() {
+                self.write_bytes_to_page(current_addr, chunk_data)?;
+        
+                // advance to next page
+                current_addr += PAGE_SIZE;
+            }
         }
    
         Ok(())
