@@ -43,7 +43,6 @@ bitflags = "1.0.4"
 
 [dev-dependencies]
 rppal = { version = "0.12.0", features = ["hal"] }
-port-expander = "0.3.0"
 
 [profile.dev]
 opt-level = "z"
