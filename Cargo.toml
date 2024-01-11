@@ -1,6 +1,6 @@
 [package]
 name = "m95320"
-version = "1.1.0"
+version = "1.2.0"
 authors = ["Jonah Stiennon <jonahss@gmail.com>", "Jonas Schievink <jonasschievink@gmail.com>", "Henrik Böving <hargonix@gmail.com>"]
 edition = "2018"
 description = "Driver for STMicroelectronics M95320 32-Kbit serial SPI bus EEPROM"
