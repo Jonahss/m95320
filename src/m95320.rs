@@ -53,10 +53,18 @@ impl<SPI: Transfer<u8>, CS: OutputPin> Flash<SPI, CS> {
         let status = this.read_status()?;
         info!("Flash::init: status = {:?}", status);
 
-        // Here we don't expect any writes to be in progress, and the latch must
-        // also be deasserted.
-        if !(status & (Status::WRITE_IN_PROGRESS | Status::WRITE_ENABLE_LATCH)).is_empty() {
+        // Here we don't expect any writes to be in progress
+        if !(status & (Status::WRITE_IN_PROGRESS)).is_empty() {
             return Err(Error::UnexpectedStatus);
+        }
+
+        if !(status & (Status::WRITE_ENABLE_LATCH)).is_empty() {
+            warn!("Write Enable Latch was set on init! Going to assume we're okay and disable it");
+            let result = this._write_disable();
+            match result {
+                Err(_) => return Err(Error::UnexpectedStatus),
+                Ok(_) => (),
+            };
         }
 
         Ok(this)
