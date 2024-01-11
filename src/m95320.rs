@@ -167,7 +167,7 @@ impl<SPI: Transfer<u8>, CS: OutputPin> BlockDevice<u16, SPI, CS> for Flash<SPI, 
     fn write_bytes(&mut self, addr: u16, data: &mut [u8]) -> Result<(), Error<SPI, CS>> {
         let mut current_addr: u16 = addr;
 
-        let mut first_chunk: &mut [u8] = &mut [];
+        let first_chunk: &mut [u8];
         let mut rest_of_data: &mut [u8] = &mut [];
 
         if (data.len() + addr as usize) < PAGE_SIZE.into() {
