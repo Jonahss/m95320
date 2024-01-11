@@ -8,7 +8,6 @@ use embedded_hal::digital::v2::OutputPin;
 const PAGE_SIZE: u16 = 32;
 enum Opcode {
     WriteEnable = 0x06,
-    #[allow(dead_code)]
     WriteDisable = 0x04,
     ReadStatusRegister = 0x05,
     #[allow(dead_code)]
@@ -83,6 +82,13 @@ impl<SPI: Transfer<u8>, CS: OutputPin> Flash<SPI, CS> {
     /// Sets the Write Enable Latch, you probably don't need to be using this command, it's used internally before write commands
     pub fn _write_enable(&mut self) -> Result<(), Error<SPI, CS>> {
         let mut cmd_buf = [Opcode::WriteEnable as u8];
+        self.command(&mut cmd_buf)?;
+        Ok(())
+    }
+
+    /// Unsets the Write Enable Latch, you probably don't need to be using this command, it undoes the _write_enable() method
+    pub fn _write_disable(&mut self) -> Result<(), Error<SPI, CS>> {
+        let mut cmd_buf = [Opcode::WriteDisable as u8];
         self.command(&mut cmd_buf)?;
         Ok(())
     }

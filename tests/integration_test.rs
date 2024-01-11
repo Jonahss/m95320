@@ -96,6 +96,11 @@ mod tests {
         
         let status = flash.read_status().expect("get status");
         assert_eq!(status, Status::WRITE_ENABLE_LATCH, "write enable latch flag is set");
+
+        flash._write_disable().expect("unset write enable latch");
+
+        let status = flash.read_status().expect("get status");
+        assert_eq!(status.bits(), 0x0, "write enable latch flag is not set");
     }
 
     #[test]
