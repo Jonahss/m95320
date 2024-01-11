@@ -80,7 +80,8 @@ impl<SPI: Transfer<u8>, CS: OutputPin> Flash<SPI, CS> {
         Ok(Status::from_bits_truncate(buf[1]))
     }
 
-    fn write_enable(&mut self) -> Result<(), Error<SPI, CS>> {
+    /// Sets the Write Enable Latch, you probably don't need to be using this command, it's used internally before write commands
+    pub fn _write_enable(&mut self) -> Result<(), Error<SPI, CS>> {
         let mut cmd_buf = [Opcode::WriteEnable as u8];
         self.command(&mut cmd_buf)?;
         Ok(())
@@ -97,7 +98,7 @@ impl<SPI: Transfer<u8>, CS: OutputPin> Flash<SPI, CS> {
             return Err(Error::AddressOutOfBounds(addr.into()))
         }
 
-        self.write_enable()?;
+        self._write_enable()?;
 
         let mut cmd_buf = [
             Opcode::Write as u8,
